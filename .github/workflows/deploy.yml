@@ -30,11 +30,24 @@ jobs:
       
       - name: Install dependencies
         run: npm ci
+        continue-on-error: false
       
       - name: Build with Next.js
         run: npm run build
         env:
           NODE_ENV: production
+        continue-on-error: false
+      
+      - name: Check if out directory exists
+        run: |
+          if [ ! -d "out" ]; then
+            echo "❌ Error: 'out' directory not found after build"
+            ls -la
+            exit 1
+          else
+            echo "✅ 'out' directory found"
+            ls -la out | head -20
+          fi
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
