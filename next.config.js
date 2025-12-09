@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production'
+const repoName = 'FIGMAFRANCO1'
+
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
@@ -7,8 +10,9 @@ const nextConfig = {
     domains: [],
     formats: ['image/avif', 'image/webp'],
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/FIGMAFRANCO1' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/FIGMAFRANCO1' : '',
+  basePath: isProd ? `/${repoName}` : '',
+  assetPrefix: isProd ? `/${repoName}` : '',
+  trailingSlash: true,
 }
 
 module.exports = nextConfig
