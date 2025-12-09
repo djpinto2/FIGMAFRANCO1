@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production'
 const repoName = 'FIGMAFRANCO1'
+// Always use basePath for GitHub Pages
+const basePath = `/${repoName}`
 
 const nextConfig = {
   reactStrictMode: true,
@@ -10,8 +11,8 @@ const nextConfig = {
     domains: [],
     formats: ['image/avif', 'image/webp'],
   },
-  basePath: isProd ? `/${repoName}` : '',
-  assetPrefix: isProd ? `/${repoName}` : '',
+  basePath: basePath,
+  assetPrefix: basePath,
   trailingSlash: true,
 }
 
