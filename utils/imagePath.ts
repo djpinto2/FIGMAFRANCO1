@@ -11,17 +11,27 @@ export function getImagePath(path: string): string {
   
   // Check if we're in production (GitHub Pages) - client-side only
   if (typeof window !== 'undefined') {
-    // Check multiple ways to detect GitHub Pages
-    const pathname = window.location.pathname
-    const hostname = window.location.hostname
-    
-    const isGitHubPages = 
-      pathname.startsWith('/FIGMAFRANCO1') || 
-      hostname.includes('github.io') ||
-      hostname === 'djpinto2.github.io'
-    
-    if (isGitHubPages && path.startsWith('/')) {
-      return `/FIGMAFRANCO1${path}`
+    try {
+      // Check multiple ways to detect GitHub Pages
+      const pathname = window.location.pathname
+      const hostname = window.location.hostname
+      const href = window.location.href
+      
+      // More comprehensive detection
+      const isGitHubPages = 
+        pathname.startsWith('/FIGMAFRANCO1') || 
+        pathname.includes('/FIGMAFRANCO1') ||
+        hostname.includes('github.io') ||
+        hostname === 'djpinto2.github.io' ||
+        href.includes('github.io/FIGMAFRANCO1')
+      
+      if (isGitHubPages && path.startsWith('/')) {
+        const correctedPath = `/FIGMAFRANCO1${path}`
+        return correctedPath
+      }
+    } catch (error) {
+      // If there's any error accessing window, fall back to original path
+      console.warn('Error detecting GitHub Pages environment:', error)
     }
   }
   
