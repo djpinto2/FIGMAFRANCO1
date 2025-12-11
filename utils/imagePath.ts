@@ -2,15 +2,31 @@
  * Get the correct image path for both development and production (GitHub Pages)
  */
 export function getImagePath(path: string): string {
-  // Check if we're in production (GitHub Pages)
+  if (!path) return path
+  
+  // Skip if path already has basePath
+  if (path.startsWith('/FIGMAFRANCO1')) {
+    return path
+  }
+  
+  // Check if we're in production (GitHub Pages) - client-side only
   if (typeof window !== 'undefined') {
-    // Client-side: check if we're on GitHub Pages by looking at the current path
-    const isGitHubPages = window.location.pathname.startsWith('/FIGMAFRANCO1')
-    if (isGitHubPages && path.startsWith('/') && !path.startsWith('/FIGMAFRANCO1')) {
+    // Check multiple ways to detect GitHub Pages
+    const pathname = window.location.pathname
+    const hostname = window.location.hostname
+    
+    const isGitHubPages = 
+      pathname.startsWith('/FIGMAFRANCO1') || 
+      hostname.includes('github.io') ||
+      hostname === 'djpinto2.github.io'
+    
+    if (isGitHubPages && path.startsWith('/')) {
       return `/FIGMAFRANCO1${path}`
     }
   }
-  // Development or if path already has basePath
+  
+  // Development or server-side: return path as-is
+  // The fix-image-paths script will handle static HTML
   return path
 }
 
