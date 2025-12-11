@@ -178,14 +178,14 @@ export default function BlogSection() {
             {/* Modal Content */}
             <div className="flex flex-col">
               {/* Image */}
-              <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-t-lg bg-gray-200">
+              <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-t-lg bg-gray-200">
                 <Image
                   src={selectedPost.image}
                   alt={selectedPost.title}
-                  fill
-                  className="object-cover"
+                  width={1200}
+                  height={600}
+                  className="w-full h-full object-cover"
                   priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                   unoptimized
                 />
               </div>
