@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
@@ -11,7 +11,7 @@ interface Stat {
 }
 
 export default function AchievementsSection() {
-  const stats: Stat[] = [
+  const stats: Stat[] = useMemo(() => [
     {
       icon: '/images/icons/members-icon.svg',
       targetNumber: 2245341,
@@ -32,7 +32,7 @@ export default function AchievementsSection() {
       targetNumber: 1926436,
       label: 'Payments',
     },
-  ]
+  ], [])
 
   const [displayNumbers, setDisplayNumbers] = useState<number[]>(
     stats.map(() => 0)
@@ -76,6 +76,9 @@ export default function AchievementsSection() {
   useEffect(() => {
     if (hasAnimated) return
 
+    const currentRef = sectionRef.current
+    if (!currentRef) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -100,13 +103,11 @@ export default function AchievementsSection() {
       }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
+    observer.observe(currentRef)
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [hasAnimated, stats])
