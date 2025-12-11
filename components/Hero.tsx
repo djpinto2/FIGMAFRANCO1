@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRegister } from '@/contexts/RegisterContext'
-import { getImagePath } from '@/utils/imagePath'
+import { useImagePath } from '@/hooks/useImagePath'
 
 interface Slide {
   title: string
@@ -68,6 +68,9 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const { openModal } = useRegister()
+  
+  // Get the current slide's image path using the hook
+  const currentImagePath = useImagePath(slides[currentSlide]?.image || '')
 
   // Auto-advance slides
   useEffect(() => {
@@ -150,7 +153,7 @@ export default function Hero() {
                     <div className="relative w-full max-w-[400px] h-[283px] flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={getImagePath(slide.image)}
+                        src={currentImagePath}
                         alt={slide.imageAlt}
                         className="w-full h-full object-contain"
                         loading="lazy"

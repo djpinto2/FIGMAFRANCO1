@@ -3,7 +3,21 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getImagePath } from '@/utils/imagePath'
+import { useImagePath } from '@/hooks/useImagePath'
+
+// Component for blog card image to use the hook
+function BlogCardImage({ imagePath, alt }: { imagePath: string; alt: string }) {
+  const correctedPath = useImagePath(imagePath)
+  return (
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={correctedPath}
+      alt={alt}
+      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+      loading="lazy"
+    />
+  )
+}
 
 interface BlogPost {
   image: string
@@ -43,6 +57,9 @@ export default function BlogSection() {
   ]
 
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
+  
+  // Get image path for modal using the hook
+  const modalImagePath = useImagePath(selectedPost?.image || '')
 
   // Close modal on ESC key
   useEffect(() => {
@@ -99,13 +116,7 @@ export default function BlogSection() {
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden rounded-t-lg bg-gray-200">
                   {post.image && (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={getImagePath(post.image)}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  <BlogCardImage imagePath={post.image} alt={post.title} />
                   )}
                 </div>
 
