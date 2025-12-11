@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getImagePath } from '@/utils/imagePath'
 
 interface BlogPost {
   image: string
@@ -101,7 +100,7 @@ export default function BlogSection() {
                   {post.image && (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
-                      src={getImagePath(post.image)}
+                      src={post.image}
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105"
                       loading="lazy"
@@ -184,7 +183,7 @@ export default function BlogSection() {
                 {selectedPost.image && (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img
-                    src={getImagePath(selectedPost.image)}
+                    src={selectedPost.image}
                     alt={selectedPost.title}
                     className="w-full h-full object-cover"
                     loading="eager"
