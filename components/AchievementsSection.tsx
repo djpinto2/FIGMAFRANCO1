@@ -1,37 +1,128 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
+interface Stat {
+  icon: string
+  targetNumber: number
+  label: string
+}
+
 export default function AchievementsSection() {
-  const stats = [
+  const stats: Stat[] = [
     {
       icon: '/images/icons/members-icon.svg',
-      number: '2,245,341',
+      targetNumber: 2245341,
       label: 'Members',
     },
     {
       icon: '/images/icons/clubs-stat-icon.svg',
-      number: '46,328',
+      targetNumber: 46328,
       label: 'Clubs',
     },
     {
       icon: '/images/icons/bookings-icon.svg',
-      number: '828,867',
+      targetNumber: 828867,
       label: 'Event Bookings',
     },
     {
       icon: '/images/icons/payments-icon.svg',
-      number: '1,926,436',
+      targetNumber: 1926436,
       label: 'Payments',
     },
   ]
 
+  const [displayNumbers, setDisplayNumbers] = useState<number[]>(
+    stats.map(() => 0)
+  )
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  // Format number with commas
+  const formatNumber = (num: number): string => {
+    return num.toLocaleString('en-US')
+  }
+
+  // Animate number from start to end
+  const animateNumber = (
+    start: number,
+    end: number,
+    duration: number,
+    callback: (value: number) => void
+  ) => {
+    const startTime = performance.now()
+    const difference = end - start
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const current = Math.floor(start + difference * easeOutQuart)
+
+      callback(current)
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+
+    requestAnimationFrame(animate)
+  }
+
+  useEffect(() => {
+    if (hasAnimated) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true)
+
+            // Animate all numbers simultaneously
+            stats.forEach((stat, index) => {
+              animateNumber(0, stat.targetNumber, 2000, (value) => {
+                setDisplayNumbers((prev) => {
+                  const newNumbers = [...prev]
+                  newNumbers[index] = value
+                  return newNumbers
+                })
+              })
+            })
+          }
+        })
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [hasAnimated, stats])
+
   return (
-    <section className="py-12 bg-neutral-bgLight lg:py-16">
+    <section
+      ref={sectionRef}
+      id="achievements"
+      className="py-12 bg-neutral-bgLight lg:py-16"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-semibold text-neutral-darkGray leading-tight lg:text-[36px] lg:leading-[44px]">
-              Helping a local <span className="text-brand-green">business reinvent itself</span>
+              Helping a local{' '}
+              <span className="text-brand-green">business reinvent itself</span>
             </h2>
             <p className="text-sm text-neutral-charcoal">
               We reached here with our hard work and dedication
@@ -53,7 +144,7 @@ export default function AchievementsSection() {
                 </div>
                 <div>
                   <div className="text-lg font-bold text-neutral-darkGray lg:text-[28px]">
-                    {stat.number}
+                    {formatNumber(displayNumbers[index])}
                   </div>
                   <div className="text-xs text-neutral-mediumGray">
                     {stat.label}
