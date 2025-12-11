@@ -149,7 +149,7 @@ export default function BlogSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="relative bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="relative bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
             {/* Close Button */}
@@ -182,13 +182,14 @@ export default function BlogSection() {
                   alt={selectedPost.title}
                   fill
                   className="object-cover"
+                  priority
                 />
               </div>
 
               {/* Content */}
-              <div className="p-6 md:p-8">
+              <div className="p-6 md:p-8 overflow-y-auto flex-1">
                 {/* Category and Date */}
-                <div className="flex items-center gap-4 mb-4 text-sm text-neutral-mediumGray">
+                <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-neutral-mediumGray">
                   <span className="px-3 py-1 rounded-full bg-brand-green/10 text-brand-green font-medium">
                     {selectedPost.category}
                   </span>
@@ -196,7 +197,7 @@ export default function BlogSection() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-2xl md:text-3xl font-semibold text-neutral-darkGray mb-4">
+                <h2 className="text-2xl md:text-3xl font-semibold text-neutral-darkGray mb-4 leading-tight">
                   {selectedPost.title}
                 </h2>
 
@@ -209,7 +210,7 @@ export default function BlogSection() {
 
                 {/* Content */}
                 <div className="prose max-w-none">
-                  <p className="text-base text-neutral-mediumGray leading-relaxed whitespace-pre-line">
+                  <p className="text-base text-neutral-mediumGray leading-relaxed">
                     {selectedPost.content}
                   </p>
                 </div>
