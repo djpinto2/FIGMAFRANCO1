@@ -96,12 +96,14 @@ export default function BlogSection() {
                 onClick={() => openModal(post)}
               >
                 {/* Image */}
-                <div className="relative h-64 overflow-hidden rounded-t-lg">
+                <div className="relative h-64 overflow-hidden rounded-t-lg bg-gray-200">
                   <Image
                     src={post.image}
                     alt={post.title}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    unoptimized
                   />
                 </div>
 
@@ -176,13 +178,15 @@ export default function BlogSection() {
             {/* Modal Content */}
             <div className="flex flex-col">
               {/* Image */}
-              <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-t-lg">
+              <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-t-lg bg-gray-200">
                 <Image
                   src={selectedPost.image}
                   alt={selectedPost.title}
                   fill
                   className="object-cover"
                   priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  unoptimized
                 />
               </div>
 
