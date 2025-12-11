@@ -98,13 +98,12 @@ export default function BlogSection() {
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden rounded-t-lg bg-gray-200">
                   {post.image && (
-                    <Image
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
                       src={post.image}
                       alt={post.title}
-                      fill
-                      className="object-cover transition-transform group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      unoptimized
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                      loading="lazy"
                     />
                   )}
                 </div>
@@ -182,14 +181,12 @@ export default function BlogSection() {
               {/* Image */}
               <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-t-lg bg-gray-200">
                 {selectedPost.image && (
-                  <Image
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
                     src={selectedPost.image}
                     alt={selectedPost.title}
-                    fill
-                    className="object-cover"
-                    priority
-                    unoptimized
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 )}
               </div>

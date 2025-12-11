@@ -146,14 +146,13 @@ export default function Hero() {
 
                   {/* Right Illustration */}
                   <div className="flex justify-center lg:justify-end">
-                    <div className="relative w-full max-w-[400px] h-[283px]">
-                      <Image
+                    <div className="relative w-full max-w-[400px] h-[283px] flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         src={slide.image}
                         alt={slide.imageAlt}
-                        fill
-                        className="object-contain"
-                        unoptimized
-                        sizes="(max-width: 768px) 100vw, 400px"
+                        className="w-full h-full object-contain"
+                        loading="lazy"
                       />
                     </div>
                   </div>
