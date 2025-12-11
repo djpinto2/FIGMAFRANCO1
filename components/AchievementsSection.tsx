@@ -38,6 +38,7 @@ export default function AchievementsSection() {
     stats.map(() => 0)
   )
   const [hasAnimated, setHasAnimated] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   // Format number with commas
@@ -74,16 +75,16 @@ export default function AchievementsSection() {
   }
 
   useEffect(() => {
-    if (hasAnimated) return
-
     const currentRef = sectionRef.current
     if (!currentRef) return
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
+          if (entry.isIntersecting && !hasAnimated && !isAnimating) {
             setHasAnimated(true)
+            setIsAnimating(true)
+            setDisplayNumbers(stats.map(() => 0)) // Reset to 0
 
             // Animate all numbers simultaneously
             stats.forEach((stat, index) => {
@@ -95,11 +96,21 @@ export default function AchievementsSection() {
                 })
               })
             })
+
+            // Reset animation flag after animation completes
+            setTimeout(() => {
+              setIsAnimating(false)
+            }, 2000)
+          } else if (!entry.isIntersecting && hasAnimated) {
+            // Reset when section leaves viewport so it can animate again when scrolled back
+            setHasAnimated(false)
+            setDisplayNumbers(stats.map(() => 0))
           }
         })
       },
       {
-        threshold: 0.3, // Trigger when 30% of the section is visible
+        threshold: 0.2, // Trigger when 20% of the section is visible (more sensitive)
+        rootMargin: '0px 0px -100px 0px', // Trigger slightly before the section is fully visible
       }
     )
 
@@ -110,7 +121,7 @@ export default function AchievementsSection() {
         observer.unobserve(currentRef)
       }
     }
-  }, [hasAnimated, stats])
+  }, [hasAnimated, isAnimating, stats])
 
   return (
     <section
