@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useRegister } from '@/contexts/RegisterContext'
 
 interface Slide {
@@ -101,13 +102,17 @@ export default function Hero() {
         <div className="relative">
           {/* Slides Container */}
           <div className="relative min-h-[400px] lg:min-h-[500px]">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                  index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                }`}
-              >
+            <AnimatePresence mode="wait">
+              {slides.map((slide, index) => (
+                index === currentSlide && (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                    className="absolute inset-0 z-10"
+                  >
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
                   {/* Left Content */}
                   <div className="flex flex-col gap-6">
@@ -150,12 +155,16 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-              </div>
-            ))}
+                  </motion.div>
+                )
+              ))}
+            </AnimatePresence>
           </div>
 
           {/* Navigation Arrows */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={prevSlide}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 hover:bg-white shadow-lg transition-all lg:left-0"
             aria-label="Previous slide"
@@ -171,8 +180,10 @@ export default function Hero() {
             >
               <path d="M15 19l-7-7 7-7" />
             </svg>
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={nextSlide}
             className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 hover:bg-white shadow-lg transition-all lg:right-0"
             aria-label="Next slide"
@@ -188,13 +199,15 @@ export default function Hero() {
             >
               <path d="M9 5l7 7-7 7" />
             </svg>
-          </button>
+          </motion.button>
 
           {/* Carousel Dots */}
           <div className="flex justify-center gap-2 mt-12 relative z-20">
             {slides.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => goToSlide(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === currentSlide 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 interface Stat {
   icon: string
@@ -132,7 +133,14 @@ export default function AchievementsSection() {
           {/* Right Stats Grid */}
           <div className="grid grid-cols-2 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="flex items-center gap-3">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex items-center gap-3"
+              >
                 <div className="flex-shrink-0">
                   <Image
                     src={stat.icon}
@@ -150,7 +158,7 @@ export default function AchievementsSection() {
                     {stat.label}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
