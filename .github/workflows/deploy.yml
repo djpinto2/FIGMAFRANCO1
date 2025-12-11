@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -32,19 +32,24 @@ jobs:
         run: npm ci
       
       - name: Build with Next.js
-        run: npm run build
-        env:
-          NODE_ENV: production
+        run: |
+          export NODE_ENV=production
+          npm run build
+        continue-on-error: false
       
-      - name: Verify out directory
+      - name: Verify build output
         run: |
           if [ ! -d "out" ]; then
-            echo "❌ Error: 'out' directory not found"
+            echo "❌ Error: 'out' directory not found after build"
+            echo "Current directory contents:"
             ls -la
+            echo "Checking .next directory:"
+            ls -la .next 2>/dev/null || echo ".next directory not found"
             exit 1
           else
-            echo "✅ 'out' directory exists"
-            ls -la out | head -10
+            echo "✅ Build successful - 'out' directory found"
+            echo "Contents of out directory:"
+            ls -la out | head -20
           fi
       
       - name: Setup Pages
