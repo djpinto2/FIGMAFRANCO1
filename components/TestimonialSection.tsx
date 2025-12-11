@@ -11,7 +11,7 @@ export default function TestimonialSection() {
   ]
 
   return (
-    <section className="py-12 bg-neutral-bgLight lg:py-16">
+    <section id="testimonials" className="py-12 bg-neutral-bgLight lg:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left Image */}
@@ -40,33 +40,19 @@ export default function TestimonialSection() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              {/* Client Logos */}
-              <div className="flex items-center gap-4 flex-wrap">
-                {clientLogos.map((logo, index) => (
-                  <div key={index} className="grayscale hover:grayscale-0 transition-all">
-                    <Image
-                      src={logo.src}
-                      alt=""
-                      width={logo.width}
-                      height={logo.height}
-                      className="h-auto w-auto opacity-70 hover:opacity-100 transition-opacity"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* Meet all customers link */}
-              <button className="flex items-center gap-2 text-sm font-semibold text-brand-green hover:text-green-600 transition-colors whitespace-nowrap">
-                Meet all customers
-                <Image
-                  src="/images/icons/arrow-right-green.svg"
-                  alt=""
-                  width={5}
-                  height={3}
-                  className="h-auto w-auto"
-                />
-              </button>
+            {/* Client Logos */}
+            <div className="flex items-center gap-4 flex-wrap overflow-hidden">
+              {clientLogos.map((logo, index) => (
+                <div key={index} className="grayscale hover:grayscale-0 transition-all flex-shrink-0">
+                  <Image
+                    src={logo.src}
+                    alt=""
+                    width={logo.width}
+                    height={logo.height}
+                    className="h-auto w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
