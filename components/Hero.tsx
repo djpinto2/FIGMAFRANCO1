@@ -146,13 +146,16 @@ export default function Hero() {
 
                   {/* Right Illustration */}
                   <div className="flex justify-center lg:justify-end">
-                    <Image
-                      src={slide.image}
-                      alt={slide.imageAlt}
-                      width={272}
-                      height={283}
-                      className="w-full max-w-[400px] h-auto"
-                    />
+                    <div className="relative w-full max-w-[400px] h-[283px]">
+                      <Image
+                        src={slide.image}
+                        alt={slide.imageAlt}
+                        fill
+                        className="object-contain"
+                        unoptimized
+                        sizes="(max-width: 768px) 100vw, 400px"
+                      />
+                    </div>
                   </div>
                 </div>
                   </motion.div>

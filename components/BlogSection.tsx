@@ -97,14 +97,16 @@ export default function BlogSection() {
               >
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden rounded-t-lg bg-gray-200">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    unoptimized
-                  />
+                  {post.image && (
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      unoptimized
+                    />
+                  )}
                 </div>
 
                 {/* Content Card - Overlapping */}
@@ -179,15 +181,17 @@ export default function BlogSection() {
             <div className="flex flex-col">
               {/* Image */}
               <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-t-lg bg-gray-200">
-                <Image
-                  src={selectedPost.image}
-                  alt={selectedPost.title}
-                  width={1200}
-                  height={600}
-                  className="w-full h-full object-cover"
-                  priority
-                  unoptimized
-                />
+                {selectedPost.image && (
+                  <Image
+                    src={selectedPost.image}
+                    alt={selectedPost.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  />
+                )}
               </div>
 
               {/* Content */}
