@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRegister } from '@/contexts/RegisterContext'
+import { getImagePath } from '@/utils/imagePath'
 
 interface Slide {
   title: string
@@ -149,7 +150,7 @@ export default function Hero() {
                     <div className="relative w-full max-w-[400px] h-[283px] flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={slide.image}
+                        src={getImagePath(slide.image)}
                         alt={slide.imageAlt}
                         className="w-full h-full object-contain"
                         loading="lazy"
