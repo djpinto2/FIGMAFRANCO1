@@ -12,7 +12,7 @@ export default function ClientsSection() {
   ]
 
   return (
-    <section className="py-12 bg-white">
+    <section id="clients" className="py-12 bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-semibold text-neutral-darkGray lg:text-[25px]">

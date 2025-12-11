@@ -17,6 +17,7 @@ export default function Home() {
       <ClientsSection />
       <CommunitySection />
       <UnlockSection
+        id="features"
         imageSrc="/images/illustrations/mobile-login.svg"
         imageAlt="Person with mobile phone showing login interface"
         title="The unseen of spending three years at Pixelgrade"
@@ -24,6 +25,7 @@ export default function Home() {
       />
       <AchievementsSection />
       <UnlockSection
+        id="design"
         imageSrc="/images/illustrations/mobile-design.svg"
         imageAlt="Person with mobile phone showing design interface"
         title="How to design your site footer like we did"

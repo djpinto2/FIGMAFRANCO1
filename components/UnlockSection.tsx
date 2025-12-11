@@ -6,6 +6,7 @@ interface UnlockSectionProps {
   title: string
   description: string
   reverse?: boolean
+  id?: string
 }
 
 export default function UnlockSection({
@@ -14,9 +15,10 @@ export default function UnlockSection({
   title,
   description,
   reverse = false,
+  id,
 }: UnlockSectionProps) {
   return (
-    <section className="py-12 bg-white lg:py-16">
+    <section id={id} className="py-12 bg-white lg:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className={`grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center ${reverse ? 'lg:flex-row-reverse' : ''}`}>
           {/* Image */}
@@ -39,7 +41,10 @@ export default function UnlockSection({
               {description}
             </p>
             <div>
-              <button className="flex items-center gap-2 text-sm font-medium text-brand-green hover:text-green-600 transition-colors">
+              <a 
+                href="#blog"
+                className="inline-flex items-center gap-2 text-sm font-medium text-brand-green hover:text-green-600 transition-colors"
+              >
                 Learn More
                 <Image
                   src="/images/icons/arrow-right-green.svg"
@@ -48,7 +53,7 @@ export default function UnlockSection({
                   height={3}
                   className="h-auto w-auto"
                 />
-              </button>
+              </a>
             </div>
           </div>
         </div>

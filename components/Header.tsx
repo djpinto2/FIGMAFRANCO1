@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRegister } from '@/contexts/RegisterContext'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { openModal } = useRegister()
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-[0px_4px_8px_rgba(171,190,209,0.4)]">
@@ -27,37 +29,38 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex md:items-center md:gap-8">
-          <Link 
+          <a 
             href="#home" 
             className="text-sm font-medium text-neutral-darkGray transition-colors hover:text-brand-green"
           >
             Home
-          </Link>
-          <Link 
+          </a>
+          <a 
             href="#features" 
             className="text-sm font-medium text-neutral-darkGray transition-colors hover:text-brand-green"
           >
             Features
-          </Link>
-          <Link 
+          </a>
+          <a 
             href="#community" 
             className="text-sm font-medium text-neutral-darkGray transition-colors hover:text-brand-green"
           >
             Community
-          </Link>
-          <Link 
+          </a>
+          <a 
             href="#blog" 
             className="text-sm font-medium text-neutral-darkGray transition-colors hover:text-brand-green"
           >
             Blog
-          </Link>
-          <Link 
-            href="#pricing" 
+          </a>
+          <a 
+            href="#testimonials" 
             className="text-sm font-medium text-neutral-darkGray transition-colors hover:text-brand-green"
           >
             Pricing
-          </Link>
+          </a>
           <button 
+            onClick={openModal}
             className="flex items-center gap-2 rounded-[3px] bg-brand-green px-6 py-2 text-sm font-medium text-white transition-all hover:bg-green-600"
             aria-label="Register Now"
           >
@@ -101,42 +104,46 @@ export default function Header() {
       {isMenuOpen && (
         <div className="md:hidden border-t border-gray-200">
           <div className="px-6 py-4 space-y-4">
-            <Link 
+            <a 
               href="#home" 
               className="block text-sm font-medium text-neutral-darkGray hover:text-brand-green"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
-            </Link>
-            <Link 
+            </a>
+            <a 
               href="#features" 
               className="block text-sm font-medium text-neutral-darkGray hover:text-brand-green"
               onClick={() => setIsMenuOpen(false)}
             >
               Features
-            </Link>
-            <Link 
+            </a>
+            <a 
               href="#community" 
               className="block text-sm font-medium text-neutral-darkGray hover:text-brand-green"
               onClick={() => setIsMenuOpen(false)}
             >
               Community
-            </Link>
-            <Link 
+            </a>
+            <a 
               href="#blog" 
               className="block text-sm font-medium text-neutral-darkGray hover:text-brand-green"
               onClick={() => setIsMenuOpen(false)}
             >
               Blog
-            </Link>
-            <Link 
-              href="#pricing" 
+            </a>
+            <a 
+              href="#testimonials" 
               className="block text-sm font-medium text-neutral-darkGray hover:text-brand-green"
               onClick={() => setIsMenuOpen(false)}
             >
               Pricing
-            </Link>
+            </a>
             <button 
+              onClick={() => {
+                openModal()
+                setIsMenuOpen(false)
+              }}
               className="w-full flex items-center justify-center gap-2 rounded-[3px] bg-brand-green px-6 py-2 text-sm font-medium text-white"
             >
               Register Now

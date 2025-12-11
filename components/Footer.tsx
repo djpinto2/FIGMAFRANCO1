@@ -49,44 +49,44 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#community" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   About us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
+                <a 
                   href="#blog" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Blog
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#cta" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Contact us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#pricing" 
+                <a 
+                  href="#achievements" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Pricing
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#testimonials" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Testimonials
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -98,44 +98,44 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#features" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Help center
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#home" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Terms of service
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#home" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Legal
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#home" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Privacy policy
-                </Link>
+                </a>
               </li>
               <li>
-                <Link 
-                  href="#" 
+                <a 
+                  href="#clients" 
                   className="text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   Status
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

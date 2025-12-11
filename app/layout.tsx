@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { RegisterProvider } from '@/contexts/RegisterContext'
+import RegisterModalWrapper from '@/components/RegisterModalWrapper'
 
 export const metadata: Metadata = {
   title: 'Nexcent - Community Management Platform',
@@ -31,7 +33,10 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {children}
+        <RegisterProvider>
+          {children}
+          <RegisterModalWrapper />
+        </RegisterProvider>
       </body>
     </html>
   )
