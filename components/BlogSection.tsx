@@ -195,7 +195,7 @@ export default function BlogSection() {
                 {selectedPost.image && (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img
-                    src={getImagePath(selectedPost.image)}
+                    src={modalImagePath}
                     alt={selectedPost.title}
                     className="w-full h-full object-cover"
                     loading="eager"
